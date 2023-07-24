@@ -1,53 +1,57 @@
 import Head from 'next/head';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
+import Header from '@/components/Header';
+import Form from '@/components/Form';
+import Footer from '@/components/Footer';
+import ReportTable from '@/components/Table';
+import { hourlySalesData } from '@/data';
 
 
 export default function Home() {
 
-  const [lastCookieStand, setLastCookieStand] = useState(null);
+  const [cookieStands, setCookieStands] = useState([]);
 
 
   const FormHandler = (event) => {
     event.preventDefault(); 
-
     // Get the form data
     const formData = new FormData(event.target);
+    const id= cookieStands.length + 1;
     const location = formData.get('location');
-    const MinCperH = formData.get('MinCperH');
-    const MaxCperH = formData.get('MaxCperH');
-    const AvgCperS = formData.get('AvgCperS');
+    // const MinCperH = formData.get('MinCperH');
+    // const MaxCperH = formData.get('MaxCperH');
+    // const AvgCperS = formData.get('AvgCperS');
+    const hourly_sales= hourlySalesData;
 
     // Create the Cookie Stand object
     const cookieStand = {
+      id,
       location,
-      MinCperH,
-      MaxCperH,
-      AvgCperS,
+      // MinCperH,
+      // MaxCperH,
+      // AvgCperS,
+      hourly_sales,
     };
 
     // Update the lastCookieStand state variable
-    setLastCookieStand(cookieStand);
-  };
+       setCookieStands([...cookieStands, cookieStand]);
+  }
+
+  const numLocations = cookieStands.length;
 
   return (
-    <>
-      <Head>
-        <title>cookie-stand-admin</title>
+    <div >
+      <Head >
+        <title>Cookie Stand Admin</title>
       </Head>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-
-        <main className="flex-grow">
-          <Form onFormSubmit={FormHandler} />
-          {lastCookieStand && <Placeholder data={lastCookieStand} />}
-        </main>
-
-        <footer className="p-4 mt-8 bg-green-700 text-green-100">
-          <h1 className="text-2xl">&copy; 2023</h1>
-        </footer>
-      </div>
-    </>
+      <Header />
+      <main className="container mx-auto p-4">
+        <Form onSubmit={FormHandler} />
+        {/* <Placeholder lastCookieStand={lastCookieStand} /> */}
+        <ReportTable reports={cookieStands} />
+      </main>
+      <Footer numLocations={cookieStands.length} />
+    </div>
   );
 }
 

@@ -1,8 +1,7 @@
 
-
-export default function Form({ onFormSubmit }) {
+export default function Form(props) {
     return (
-      <form className="w-3/4 p-4 mx-auto my-8 bg-green-500 text-green-70" onSubmit={onFormSubmit}>
+      <form className="w-3/4 p-4 mx-auto my-8 bg-green-500 text-green-70" onSubmit={props.onSubmit}>
         <h2 className="text-4xl text-center mb-6 text-green-200">Create Cookie Stand</h2>
         <div className="flex mb-4">
           <label className="text-lg font-semibold">Location</label>
