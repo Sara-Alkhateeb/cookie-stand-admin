@@ -1,7 +1,7 @@
 # cookie-stand-admin
 create a Cookie Stand Admin app using Next.js and style using Tailwind CSS.
 
-# LAB - Class 37
+# LAB - Class 37 - 38
 
 ## Project: cookie-stand-admin
 
