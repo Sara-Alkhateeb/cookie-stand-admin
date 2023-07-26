@@ -1,3 +1,4 @@
+
 export default function Footer({ numLocations }) {
     return (
         <footer className="p-4 mt-8 bg-green-700 text-green-100">
